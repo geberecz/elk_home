@@ -1,0 +1,60 @@
+version: '3.3'
+services:
+  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+    environment:
+      - node.name=elk1
+      - cluster.name=elk-docker-cluster
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - elk
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.6.0
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    volumes:
+      - type: bind
+        source: ./logstash/config/logstash.yml
+        target: /usr/share/logstash/config/logstash.yml
+      - type: bind
+        source: ./logstash/config/pipelines.yml
+        target: /usr/share/logstash/config/pipelines.yml
+      - type: bind
+        source: ./logstash/pipeline/pipeline.conf
+        target: /usr/share/logstash/pipeline/pipeline.conf
+      - type: volume
+        source: data_logstash
+        target: /usr/share/logstash/data
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.2
+    networks:
+      - elk
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    depends_on:
+      - es01
+
+volumes:
+  data01:
+    driver: local
+  data_logstash:
+    driver: local
+
+networks:
+  elk:
+    driver: overlay
