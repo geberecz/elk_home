@@ -27,6 +27,12 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Initialized OK, I can deploy.'
+				withCredentials([usernamePassword(credentialsId: '7dc1a043-ad75-40d6-8f30-ebc0cc80b3eb',\
+				 passwordVariable: 'PASSWD',\
+				 usernameVariable: 'USER')]) {
+    				echo "My username is: $USER"
+    				echo 'My username is: $USER'
+				}
 			}
 		}
 
