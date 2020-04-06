@@ -3,7 +3,7 @@ pipeline {
 	agent any
 
 	environment {
-		GLOBAL_PATH='/home'
+		H="""sh 'echo "$(hostname)"'"""
 	}
 
 	stages {
@@ -14,6 +14,7 @@ pipeline {
 				LOCAL_PATH='/home/ec2-user'
 			}
 			steps {
+				echo "Hostname: ${H}"
 				sh 'echo "I am running the job ${JOB_NAME} on host $(hostname)"'
 				sh 'printenv | grep "PATH"'
 			}
