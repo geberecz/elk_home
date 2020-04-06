@@ -8,11 +8,6 @@ pipeline {
 		}
 
 		stage('Deploy') {
-			when {
-				expression {
-					currentBuid.result == null || currentBuid.result == 'SUCCESS'
-				}
-			}
 			steps {
 				echo 'Initialized OK, I can deploy.'
 			}
