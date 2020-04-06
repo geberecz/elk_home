@@ -5,7 +5,7 @@ pipeline {
 	environment {
 		H = """${sh(
                 returnStdout: true,
-                script: 'echo "clang"'
+                script: 'echo "$(hostname)"'
             )}""" 
 	}
 
