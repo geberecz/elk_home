@@ -3,7 +3,10 @@ pipeline {
 	agent any
 
 	environment {
-		H="""sh 'echo "$(hostname)"'"""
+		H = """${sh(
+                returnStdout: true,
+                script: 'echo "clang"'
+            )}""" 
 	}
 
 	stages {
