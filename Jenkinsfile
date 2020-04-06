@@ -15,7 +15,7 @@ pipeline {
 			}
 			steps {
 				sh 'echo "I am running the job ${JOB_NAME} on host $(hostname)"'
-				sh 'printenv'
+				sh 'printenv | grep "PATH"'
 			}
 		}
 
