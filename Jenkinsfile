@@ -7,7 +7,7 @@ pipeline {
 		stage('Initialize') {
 		
 			steps {
-				sh 'echo "I am working on host: $(hostname)"'
+				echo "I am working on host: $(hostname)"
 			}
 		}
 
