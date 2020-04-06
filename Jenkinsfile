@@ -3,7 +3,7 @@ pipeline {
 	agent any
 
 	parameters {
-		string(defaultValue: 'latest', description: 'Input your parameter e.g. 1.0.3', name: 'VERSION', trim: false)
+		string(defaultValue: 'latest', description: 'Input your parameter e.g. 1.0.3', name: 'VERSION')
 	}
 
 	environment {
