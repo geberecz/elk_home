@@ -3,7 +3,8 @@ pipeline {
 	agent any
 
 	parameters {
-		string(defaultValue: 'latest', description: 'Input your parameter e.g. 1.0.3', name: 'VERSION')
+		//string(defaultValue: 'latest', description: 'Input your parameter e.g. 1.0.3', name: 'VERSION')
+		string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
 	}
 
 	stages {
