@@ -22,6 +22,7 @@ pipeline {
 				LOCAL_PATH='/home/ec2-user'
 			}
 			steps {
+				echo "Version: ${params.VERSION}"
 				echo "Hostname: ${H}"
 				sh 'echo "I am running the job ${JOB_NAME} on host $(hostname)"'
 				sh 'printenv | grep "PATH"'
