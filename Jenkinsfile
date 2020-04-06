@@ -1,11 +1,8 @@
 pipeline {
-	
-	agent any
-
-	parameters {
-		//string(defaultValue: 'latest', description: 'Input your parameter e.g. 1.0.3', name: 'VERSION')
-		string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
-	}
+    agent any
+    parameters {
+        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+    }
 
 	stages {
 	
@@ -15,7 +12,7 @@ pipeline {
 				LOCAL_PATH='/home/ec2-user'
 			}
 			steps {
-				echo "Version: ${params.VERSION}"
+				echo "Version: ${params.Greeting}"
 				sh 'echo "I am running the job ${JOB_NAME} on host $(hostname)"'
 				sh 'printenv | grep "PATH"'
 			}
