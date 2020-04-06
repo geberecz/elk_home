@@ -3,12 +3,15 @@ pipeline {
 	stages {
 		stage('Initialize') {
 			steps {
-				echo 'Hello world!'
+				parameters {
+  					string defaultValue: 'latest', description: 'Input your parameter (e.g.: 1.0.3)', name: 'VERSION', trim: false
+				}
 			}
 		} 
 		stage('Clean the workspace') {
 			steps {
-				echo 'I am cleaning zhe Workspace...'
+				echo 'Your version is params.VERSION'
+				echo 'I am cleaning the Workspace...'
 				cleanWs()
 			}
 		}
