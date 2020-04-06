@@ -8,6 +8,8 @@ pipeline {
 		
 			steps {
 				sh 'echo "I am working on host: $(hostname)"'
+				echo "I am running the job: ${JOB_NAME}"
+				echo 'I am running the job: ${JOB_NAME}'
 			}
 		}
 
