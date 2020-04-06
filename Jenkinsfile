@@ -3,11 +3,10 @@ pipeline {
 	agent any
 
 	environment {
-		properties([parameters([string(defaultValue: 'latest', description: 'Set parameter', name: 'VERSION', trim: false)])])
 		H = """${sh(
-                returnStdout: true,
-                script: 'echo "$(hostname)"'
-            )}"""
+			returnStdout: true,
+			script: 'echo "$(hostname)"'
+        )}"""
 
 	}
 
