@@ -2,6 +2,10 @@ pipeline {
 	
 	agent any
 
+	parameters {
+		string defaultValue: 'latest', description: 'Input your parameter, e.g. 1.0.3', name: 'VERSION', trim: false
+	}
+
 	environment {
 		H = """${sh(
 			returnStdout: true,
@@ -27,10 +31,6 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Initialized OK, I can deploy.'
-				withCredentials([usernamePassword(credentialsId: '7dc1a043-ad75-40d6-8f30-ebc0cc80b3eb',\
-				 passwordVariable: 'PASSWD',\
-				 usernameVariable: 'USER')]) {
-    				echo "My username and pasword is: $USER $PASSWD"
 				}
 			}
 		}
