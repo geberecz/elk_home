@@ -1,10 +1,16 @@
 pipeline {
 	agent any
 	stages {
-		stage('Stage 1') {
+		stage('Initialize') {
 			steps {
 				echo 'Hello world!'
 			}
 		} 
+		stage('Clean the workspace') {
+			steps {
+				echo 'I am cleaning zhe Workspace...'
+				cleanWs()
+			}
+		}
 	}
 }
