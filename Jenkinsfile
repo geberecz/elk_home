@@ -1,6 +1,6 @@
 pipeline {
 	
-	properties([parameters([string(defaultValue: 'latest', description: 'Input your parameter, e.g.: 1.0.3', name: 'VERSION', trim: false)])])
+	options([parameters([string(defaultValue: 'latest', description: 'Input your parameter, e.g.: 1.0.3', name: 'VERSION', trim: false)])])
 
 	agent any
 	stages {
