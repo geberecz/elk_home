@@ -3,7 +3,7 @@ pipeline {
 	stages {
 		stage('Initialize') {
 			steps {
-				sh 'echo hostname'
+				sh 'echo $(hostname)'
 			}
 		} 
 		stage('Clean the workspace') {
