@@ -23,7 +23,8 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Initialized OK, I can deploy.'
-				sh 'ls Junk || true'
+				sh 'ls Junk'
+				echo 'OK'
 			}
 		}
 	}
