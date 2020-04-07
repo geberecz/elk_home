@@ -23,7 +23,7 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Initialized OK, I can deploy.'
-				sh 'ls Jenkinsfile'
+				sh 'ls Junk'
 			}
 		}
 	}
