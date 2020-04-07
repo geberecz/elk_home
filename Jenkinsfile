@@ -32,7 +32,7 @@ pipeline {
 		always {
 			echo 'I am always cleaning the Workspace...'
 			cleanWs()
-			echo "The result is: currentBuild.result"
+			echo "The result is: ${currentBuild.result}"
 		}
 		failure {
 			echo "It ended with error..."
