@@ -23,17 +23,17 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				echo 'Initialized OK, I can deploy.'
-				sh 'ls Junk'
-				echo 'OK'
+				sh 'ls Junk 2>/dev/null || true'   //I changed the false to true...
 			}
 		}
 	}
 
 	post {
 		always {
+			echo "The overall result is: ${currentBuild.result}"
 			echo 'I am always cleaning the Workspace...'
 			cleanWs()
-			echo "The result is: ${currentBuild.result}"
+
 		}
 		failure {
 			echo "It ended with error..."
