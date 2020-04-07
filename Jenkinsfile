@@ -1,7 +1,9 @@
 pipeline {
+    
     agent any
+    
     parameters {
-        string(name: 'VERSION', defaultValue: 'latest', description: 'Input your parameter, e.g. 1.0.3',trim: false)
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Input your parameter, e.g. 1.0.3', trim: false)
     }
 
 	stages {
@@ -29,6 +31,18 @@ pipeline {
 				echo 'I am cleaning the Workspace...'
 				cleanWs()
 			}
+		}
+	}
+
+	post {
+		always {
+			echo "Always make last check..."
+		}
+		failure {
+			echo "It ended with error..."
+		}
+		success {
+			echo "It ended successfully..."
 		}
 	}
 }
