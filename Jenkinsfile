@@ -22,7 +22,7 @@ pipeline {
 
 		stage('Deploy') {
 			steps {
-				echo 'Initialized OK, I can deploy.'
+				echoo 'Initialized OK, I can deploy.'
 			}
 		}
 
