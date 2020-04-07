@@ -25,18 +25,12 @@ pipeline {
 				echoo 'Initialized OK, I can deploy.'
 			}
 		}
-
-		stage('Clean the workspace') {
-			steps {
-				echo 'I am cleaning the Workspace...'
-				cleanWs()
-			}
-		}
 	}
 
 	post {
 		always {
-			echo "Always make last check..."
+			echo 'I am always cleaning the Workspace...'
+			cleanWs()
 		}
 		failure {
 			echo "It ended with error..."
