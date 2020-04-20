@@ -23,7 +23,7 @@ pipeline {
 		stage('Build for Develop') {
 			when { branch "Development"}
 			steps {
-				"I am going to replace the file content..."
+				echo "I am going to replace the file content..."
 				contentReplace( configs: [ 
 					fileContentReplaceConfig( configs: [ 
 						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${params.VERSION}', matchCount: 0) 
