@@ -36,10 +36,21 @@ pipeline {
 		}
 
 
-		stage('Deploy') {
+		stage('Deploy to Develop') {
+			when { branch "Develop"}
 			steps {
-				echo 'Initialized OK, I can deploy.'
-				sh 'ls Junk 2>/dev/null || true'   //I changed the false to true...
+				echo 'I am going to deploy the file to ${BRANCH_NAME} environment...'
+				sshPublisher(
+					publishers:
+						[sshPublisherDesc(
+							configName: 'elk1',
+							transfers: [
+								sshTransfer(
+									execCommand: 'date >> /tmp/date.txt'
+								)	
+							])
+						]
+				)
 			}
 		}
 	}
