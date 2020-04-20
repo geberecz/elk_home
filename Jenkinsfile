@@ -35,7 +35,7 @@ pipeline {
 					],
 					fileEncoding: 'UTF-8',
 					//filePath: 'elk_compose_stack.yml')
-					filePath: '${COMPOSE_FILE}')
+					filePath: "${COMPOSE_FILE}")
 				])
 			}
 		}
