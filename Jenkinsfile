@@ -6,6 +6,10 @@ pipeline {
         string(name: 'VERSION', defaultValue: 'latest', description: 'Input your parameter, e.g. 1.0.3', trim: false)
     }
 
+    environment {
+    	COMPOSE_FILE='elk_compose_stack.yml'
+    }
+
 	stages {
 	
 		stage('Initialize') {
@@ -24,13 +28,14 @@ pipeline {
 		stage('Build for Develop') {
 			when { branch "Development"}
 			steps {
-				echo "I am going to replace the file content on ${BRANCH_NAME} environment..."
+				echo "I am going to replace the ${COMPOSE_FILE} content on ${BRANCH_NAME} environment..."
 				contentReplace( configs: [ 
 					fileContentReplaceConfig( configs: [ 
 						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${VERSION}', matchCount: 0) 
 					],
 					fileEncoding: 'UTF-8',
-					filePath: 'elk_compose_stack.yml') 
+					//filePath: 'elk_compose_stack.yml')
+					filePath: '${COMPOSE_FILE}')
 				])
 			}
 		}
@@ -47,8 +52,8 @@ pipeline {
 							transfers: [
 								sshTransfer(
 									sourceFiles: 'elk_compose_stack.yml',
-									remoteDirectorySDF: '/tmp/',
-									//execCommand: 'mv elk_compose_stack.yml /tmp'
+									remoteDirectory: '/',
+									execCommand: 'mv elk_compose_stack.yml /tmp'
 								)	
 							])
 						]
