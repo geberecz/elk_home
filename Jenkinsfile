@@ -26,7 +26,7 @@ pipeline {
 				"I am going to replace the file content..."
 				contentReplace( configs: [ 
 					fileContentReplaceConfig( configs: [ 
-						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+\.[0-9]+\.[0-9]+)|(latest)', replace: '$1${params.VERSION}', matchCount: 0) 
+						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${params.VERSION}', matchCount: 0) 
 					],
 					fileEncoding: 'UTF-8',
 					filePath: 'elk_compose_stack.yml') 
