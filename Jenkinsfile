@@ -34,7 +34,6 @@ pipeline {
 						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${VERSION}', matchCount: 0) 
 					],
 					fileEncoding: 'UTF-8',
-					//filePath: 'elk_compose_stack.yml')
 					filePath: "${COMPOSE_FILE}")
 				])
 			}
@@ -44,16 +43,16 @@ pipeline {
 		stage('Deploy to Development') {
 			when { branch "Development"}
 			steps {
-				echo "I am going to deploy the file to ${BRANCH_NAME} environment..."
+				echo "I am going to deploy the ${COMPOSE_FILE} to ${BRANCH_NAME} environment..."
 				sshPublisher(
 					publishers:
 						[sshPublisherDesc(
 							configName: 'elk1',
 							transfers: [
 								sshTransfer(
-									sourceFiles: 'elk_compose_stack.yml',
+									sourceFiles: "${COMPOSE_FILE}",
 									remoteDirectory: '/',
-									execCommand: 'mv elk_compose_stack.yml /tmp'
+									execCommand: "mv ${COMPOSE_FILE} /tmp"
 								)	
 							])
 						]
