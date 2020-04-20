@@ -47,8 +47,8 @@ pipeline {
 							transfers: [
 								sshTransfer(
 									//execCommand: 'date >> /tmp/date.txt'
-									sourceFiles: 'elk_compose_stack.yml'
-									remoteDirectory: '/tmp/xxx'
+									sourceFiles: 'elk_compose_stack.yml',
+									remoteDirectory: '/tmp'
 								)	
 							])
 						]
