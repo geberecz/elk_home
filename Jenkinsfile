@@ -47,7 +47,7 @@ pipeline {
 							transfers: [
 								sshTransfer(
 									sourceFiles: 'elk_compose_stack.yml',
-									remoteDirectory: '/tmp/elk_compose_stack.yml',
+									remoteDirectorySDF: '/tmp/',
 									//execCommand: 'mv elk_compose_stack.yml /tmp'
 								)	
 							])
