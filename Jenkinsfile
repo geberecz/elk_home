@@ -36,8 +36,8 @@ pipeline {
 		}
 
 
-		stage('Deploy to Develop') {
-			when { branch "Develop"}
+		stage('Deploy to Development') {
+			when { branch "Development"}
 			steps {
 				echo 'I am going to deploy the file to ${BRANCH_NAME} environment...'
 				sshPublisher(
