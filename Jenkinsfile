@@ -24,7 +24,18 @@ pipeline {
 		stage('Build for Develop') {
 			when { branch "Development"}
 			steps {
-				echo "I am going to replace the file content..."
+				echo "I am going to replace the file content on Development..."
+				contentReplace( configs: [ 
+					fileContentReplaceConfig( configs: [ 
+						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${VERSION}', matchCount: 0) 
+					],
+					fileEncoding: 'UTF-8',
+					filePath: 'elk_compose_stack.yml') 
+				])
+			}
+			when { branch "master"}
+			steps {
+				echo "I am going to replace the file content on master..."
 				contentReplace( configs: [ 
 					fileContentReplaceConfig( configs: [ 
 						fileContentReplaceItemConfig( search: '(elasticsearch:)([0-9]+.[0-9]+.[0-9]+)|(latest)', replace: '$1${VERSION}', matchCount: 0) 
