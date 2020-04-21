@@ -1,5 +1,3 @@
-def ERROR_MESSAGE = 'No error...'
-
 pipeline {
     
     agent any
@@ -20,7 +18,7 @@ pipeline {
 			steps {
 				echo "If parameter \"VERSION\" is empty, the deployment fails..."
 				//sh 'if [ "${VERSION}" = "" ]; then false;else true;fi'
-				sh '[ "${VERSION}" != "" ] || export ERROR_MESSAGE="Because no VERSION entered..." && false'
+				sh '[ "${VERSION}" != "" ] || false'
 			}
 		}
 
@@ -51,7 +49,6 @@ pipeline {
 		}
 		failure {
 			echo "Deployment ended with error..."
-			sh 'echo "${ERROR_MESSAGE}"'
 		}
 		success {
 			echo "Deployment ended successfully..."
