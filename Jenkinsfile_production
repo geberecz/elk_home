@@ -14,6 +14,11 @@ pipeline {
 
 	stages {
 	
+		stage('Checkout') {
+			echo "If parameter \"VERSION\" is empty, the deployment fails..."
+			sh '[ "${VERSION}" = "" ] && false'
+		}
+
 		stage('Deploy to Production') {
 			//when { branch "master"}
 			steps {
