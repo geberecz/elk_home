@@ -13,7 +13,7 @@ pipeline {
 	stages {
 	
 		stage('Deploy to Production') {
-			//when { branch "Development"}
+			when { branch "master"}
 			steps {
 				echo "I am going to update the ${COMPOSE_FILE} file in Production environment..."
 				sshPublisher(
@@ -22,7 +22,7 @@ pipeline {
 							configName: 'elk1',
 							transfers: [
 								sshTransfer(
-									execCommand: "ls -l ${COMPOSE_FILE} >> /tmp/status.txt"
+									execCommand: "cat ${COMPOSE_FILE} >> /tmp/status.txt"
 								)	
 							])
 						]
