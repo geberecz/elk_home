@@ -13,13 +13,13 @@ pipeline {
 
 	stages {
 	
-		stage('Checkout') {
+		/*stage('Checkout') {
 			steps {
 				echo "If parameter \"VERSION\" is empty, the deployment fails..."
 				sh '[ "${VERSION}" != "" ] || false'
 			}
 		}
-
+		*/
 		stage('Deploy to Production') {
 			steps {
 				echo "I am going to update the ${COMPOSE_FILE} file in Production environment..."
@@ -29,7 +29,7 @@ pipeline {
 							configName: "${REMOTE_SERVER}",
 							transfers: [
 								sshTransfer(
-									execCommand: "sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
+									execCommand: "echo \"Test\" > /tmp/test.txt;sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
 									              date >> /tmp/status.txt && grep \"mc:${VERSION}\" ${COMPOSE_FILE} >> /tmp/status.txt"
 								)	
 							])
