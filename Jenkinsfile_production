@@ -4,12 +4,12 @@ pipeline {
     
     parameters {
         //string(name: 'VERSION', defaultValue: 'latest', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
-        string(name: 'VERSION', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
+        string(name: 'VERSION', defaultValue: '',description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
 
     }
 
     environment {
-    	COMPOSE_FILE='/home/ec2-user/docker-compose.yml'
+    	COMPOSE_FILE='/home/ec2-user/mc_app/mc_stack.yml'
     }
 
 	stages {
@@ -32,8 +32,8 @@ pipeline {
 							configName: 'elk1',
 							transfers: [
 								sshTransfer(
-									execCommand: "sed -i -E \"s/(elasticsearch:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
-									              date >> /tmp/status.txt && grep \"${VERSION}\" ${COMPOSE_FILE} >> /tmp/status.txt"
+									execCommand: "sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
+									              date >> /tmp/status.txt && grep \"mc:${VERSION}\" ${COMPOSE_FILE} >> /tmp/status.txt"
 								)	
 							])
 						]
