@@ -3,7 +3,9 @@ pipeline {
     agent any
     
     parameters {
-        string(name: 'VERSION', defaultValue: 'latest', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
+        //string(name: 'VERSION', defaultValue: 'latest', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
+        string(name: 'VERSION', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
+
     }
 
     environment {
@@ -23,7 +25,7 @@ pipeline {
 							transfers: [
 								sshTransfer(
 									execCommand: "sed -i -E \"s/(elasticsearch:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
-									              date >> /tmp/status.txt && ls -l ${COMPOSE_FILE} >> /tmp/status.txt"
+									              date >> /tmp/status.txt && grep \"${VERSION}\" ${COMPOSE_FILE} >> /tmp/status.txt"
 								)	
 							])
 						]
