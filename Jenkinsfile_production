@@ -16,13 +16,11 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				echo "If parameter \"VERSION\" is empty, the deployment fails..."
-				//sh 'if [ "${VERSION}" = "" ]; then false;else true;fi'
 				sh '[ "${VERSION}" != "" ] || false'
 			}
 		}
 
 		stage('Deploy to Production') {
-			//when { branch "master"}
 			steps {
 				echo "I am going to update the ${COMPOSE_FILE} file in Production environment..."
 				sshPublisher(
