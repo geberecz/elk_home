@@ -8,6 +8,7 @@ pipeline {
 
     environment {
     	COMPOSE_FILE='/home/ec2-user/mc_app/mc_stack.yml'
+    	REMOTE_SERVER='elk1'
     }
 
 	stages {
@@ -27,7 +28,7 @@ pipeline {
 				sshPublisher(
 					publishers:
 						[sshPublisherDesc(
-							configName: 'elk1',
+							configName: "${REMOTE_SERVER}",
 							transfers: [
 								sshTransfer(
 									execCommand: "sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
