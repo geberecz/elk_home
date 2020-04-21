@@ -22,7 +22,7 @@ pipeline {
 							configName: 'elk1',
 							transfers: [
 								sshTransfer(
-									execCommand: "cat ${COMPOSE_FILE} >> /tmp/status.txt"
+									execCommand: "sed -i -E "s/(elasticsearch:+)([0-9].*)|(latest)/\1${VERSION}/g" ${COMPOSE_FILE}"
 								)	
 							])
 						]
