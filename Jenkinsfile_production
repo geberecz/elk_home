@@ -1,3 +1,5 @@
+def ERROR_MESSAGE = 'No error...'
+
 pipeline {
     
     agent any
@@ -10,7 +12,6 @@ pipeline {
 
     environment {
     	COMPOSE_FILE='/home/ec2-user/docker-compose.yml'
-    	ERROR_MESSAGE='No error...'
     }
 
 	stages {
