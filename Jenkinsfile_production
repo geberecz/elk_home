@@ -17,7 +17,7 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				echo "If parameter \"VERSION\" is empty, the deployment fails..."
-				sh '[ "${VERSION}" = "" ] || false'
+				sh '[ "${VERSION}" = "" ] && false'
 			}
 		}
 
