@@ -20,7 +20,7 @@ pipeline {
 			steps {
 				echo "If parameter \"VERSION\" is empty, the deployment fails..."
 				//sh 'if [ "${VERSION}" = "" ]; then false;else true;fi'
-				sh '[ "${VERSION}" != "" ] || false && ERROR_MESSAGE="Because no VERSION entered..."'
+				sh '[ "${VERSION}" != "" ] || false || ERROR_MESSAGE="Because no VERSION entered..."'
 			}
 		}
 
