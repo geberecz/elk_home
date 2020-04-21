@@ -1,0 +1,46 @@
+pipeline {
+    
+    agent any
+    
+    parameters {
+        string(name: 'VERSION', defaultValue: 'latest', description: 'Input parameter (version of Docker Image), e.g. 1.0.3', trim: false)
+    }
+
+    environment {
+    	COMPOSE_FILE='/home/ec2-user/docker-compose.yml'
+    }
+
+	stages {
+	
+		stage('Deploy to Production') {
+			//when { branch "Development"}
+			steps {
+				echo "I am going to update the ${COMPOSE_FILE} file in Production environment..."
+				sshPublisher(
+					publishers:
+						[sshPublisherDesc(
+							configName: 'elk1',
+							transfers: [
+								sshTransfer(
+									execCommand: "ls -l ${COMPOSE_FILE} >> /tmp/status.txt"
+								)	
+							])
+						]
+				)
+			}
+		}
+	}
+
+	post {
+		always {
+			echo 'I am always cleaning the Workspace with cleanWs...'
+			cleanWs()
+		}
+		failure {
+			echo "Deployment ended with error..."
+		}
+		success {
+			echo "Deployment ended successfully..."
+		}
+	}
+}
