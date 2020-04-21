@@ -29,7 +29,7 @@ pipeline {
 							configName: "${REMOTE_SERVER}",
 							transfers: [
 								sshTransfer(
-									execCommand: "[ \"${VERSION}\" != \"\" ] || false;sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
+									execCommand: "[ \"${VERSION}\" != \"\" ] || exit 1;sed -i -E \"s/(mc:+)([0-9].*)|(latest)/\\1${VERSION}/g\" ${COMPOSE_FILE} && \
 									              date >> /tmp/status.txt && grep \"mc:${VERSION}\" ${COMPOSE_FILE} >> /tmp/status.txt"
 								)	
 							])
