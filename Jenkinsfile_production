@@ -51,7 +51,7 @@ pipeline {
 		}
 		failure {
 			echo "Deployment ended with error..."
-			echo "${ERROR_MESSAGE}"
+			sh 'echo "${ERROR_MESSAGE}"'
 		}
 		success {
 			echo "Deployment ended successfully..."
